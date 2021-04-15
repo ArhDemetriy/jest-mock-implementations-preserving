@@ -1,6 +1,6 @@
 {
   "name": "jest-mock-implementations-preserving",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Auto jest-mock safety implementations",
   "main": "mockModule.js",
   "scripts": {
