@@ -1,6 +1,6 @@
 {
   "name": "jest-mock-implementations-preserving",
-  "version": "0.0.3",
+  "version": "0.9.0",
   "description": "Auto jest-mock safety implementations",
   "main": "mockModule.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/ArhDemetriy/jest-mock-implementations-preserving#readme",
   "dependencies": {
-    "jest": "^22.0.0"
+    "jest": "*"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
