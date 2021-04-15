@@ -1,6 +1,6 @@
 {
   "name": "jest-mock-implementations-preserving",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Auto jest-mock safety implementations",
   "main": "mockModule.js",
   "scripts": {
@@ -11,9 +11,11 @@
     "url": "git+https://github.com/ArhDemetriy/jest-mock-implementations-preserving.git"
   },
   "keywords": [
-    "jest",
+    "Jest",
     "mock",
-    "implementation"
+    "implementation",
+    "JavaScript",
+    "TypeScript"
   ],
   "author": "ArhDemetriy <ArhDemetriy@GMail.com>",
   "license": "MIT",

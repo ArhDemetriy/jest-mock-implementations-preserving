@@ -50,3 +50,43 @@ jest.mock('./foo', () => mockModule(jest.requireActual('./foo'), {
 const foo = new Foo()
 foo.fooTest() // log "Foo is mocked !!!"
 ```
+## TypeScript magic
+то, ради чего и собирался этот пакет. Автоподстановка методов класса, и ограничение на параметры методов и возвращаемые ими значения.
+``` ts
+// foo.ts
+class Foo {
+  constructor(s: string) { }
+  fooTest(n: number) { return `${n}` }
+}
+function bar(b: boolean) { }
+```
+``` ts
+// foo.test.ts
+import { Foo, bar } from "./foo"
+jest.mock("./foo", () => mockModule<{ Foo: typeof Foo, bar: typeof bar }>(jest.requireActual("./foo"), {
+  // f intelliSense to "Foo"
+  f,
+  // error
+  Foo: 321,
+  // ok
+  Foo: { },
+  Foo: {
+  // methods
+    // error
+    fooTest: 'asd',
+    fooTest: () => { },
+    fooTest: (n: string) => '',
+    //  ok
+    fooTest: () => '',
+    fooTest: (n) => '',
+    fooTest: (n: number) => '',
+
+  // constructor
+    // error
+    classConstructor: function (q: boolean) { },
+    // ok
+    classConstructor: function () { },
+    classConstructor: function (q: string) { },
+  },
+}))
+```
