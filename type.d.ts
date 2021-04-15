@@ -3,8 +3,12 @@ type TFunction<F extends (...args) => any = (...args) => any, Z = F> = (this: Z,
 type TModule = { [k: string]: NewCall | TFunction }
 type Implementations<Module> = {
     [exported in keyof Module]?:
-      | ((this: Module[exported], ...args) => any)
-      | { classConstructor?: (this: Module[exported], ...args) => any, [method: string]: (this: Module[exported], ...args) => any }
+      Module[exported] extends NewCall ?
+        | { [method in keyof InstanceType<Module[exported]>]?: (this: InstanceType<Module[exported]>, ...args: Parameters<InstanceType<Module[exported]>[method]>) => ReturnType<InstanceType<Module[exported]>[method]> }
+        | { classConstructor?: (this: InstanceType<Module[exported]>, ...args: ConstructorParameters<Module[exported]>)=> void }
+      : Module[exported] extends TFunction ?
+        ((this: Module[exported], ...args: Parameters<Module[exported]>) => ReturnType<Module[exported]>)
+      : never
   }
 
 /**
@@ -26,8 +30,12 @@ declare function mockModule<Module extends TModule>(
   mockebleModule: { [exported in keyof Module]: Module[exported] },
   implementations?: {
     [exported in keyof Module]?:
-      | ((this: Module[exported], ...args) => any)
-      | { classConstructor?: (this: Module[exported], ...args) => any, [method: string]: (this: Module[exported], ...args) => any }
+      Module[exported] extends NewCall ?
+        | { [method in keyof InstanceType<Module[exported]>]?: (this: InstanceType<Module[exported]>, ...args: Parameters<InstanceType<Module[exported]>[method]>) => ReturnType<InstanceType<Module[exported]>[method]> }
+        | { classConstructor?: (this: InstanceType<Module[exported]>, ...args: ConstructorParameters<Module[exported]>)=> void }
+      : Module[exported] extends TFunction ?
+        ((this: Module[exported], ...args: Parameters<Module[exported]>) => ReturnType<Module[exported]>)
+      : never
   }
 ): { [exported in keyof Module]: Module[exported] }
 
