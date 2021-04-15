@@ -1,5 +1,8 @@
 # jest-mock-implementations-preserving
 Auto jest-mock safety implementations
+```
+npm i -D jest-mock-implementations-preserving
+```
 ## Проблема
 jest мокает модули удаляя реализацию. А хотелось-бы сохранять её.
 ## Решение без этого пакета
