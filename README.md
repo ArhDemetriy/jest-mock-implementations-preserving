@@ -42,6 +42,7 @@ export { Foo }
 import { mockModule } from 'jest-mock-implementations-preserving'
 jest.mock('./foo', () => mockModule(jest.requireActual('./foo'), {
   Foo: {
+    // Осторожно. Полностью заменяет реализацию.
     classConstructor: function () { this.fooText = 'Foo is mocked' },
     getText: function () { return this.fooText + ' !!!' },
   },
