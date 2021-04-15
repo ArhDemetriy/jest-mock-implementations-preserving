@@ -83,10 +83,10 @@ jest.mock("./foo", () => mockModule<{ Foo: typeof Foo, bar: typeof bar }>(jest.r
 
   // constructor
     // error
-    classConstructor: function (q: boolean) { },
+    classConstructor: function (s: boolean) { },
     // ok
     classConstructor: function () { },
-    classConstructor: function (q: string) { },
+    classConstructor: function (s: string) { },
   },
 }))
 ```

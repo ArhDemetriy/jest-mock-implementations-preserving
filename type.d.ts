@@ -8,7 +8,7 @@ type Implementations<Module> = {
         | { classConstructor?: (this: InstanceType<Module[exported]>, ...args: ConstructorParameters<Module[exported]>)=> void }
       : Module[exported] extends TFunction ?
         ((this: Module[exported], ...args: Parameters<Module[exported]>) => ReturnType<Module[exported]>)
-      : never
+      : ((...args) => any) | { classConstructor?: (...args) => any, [k: string]: (...args) => any }
   }
 
 /**
