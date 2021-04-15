@@ -61,6 +61,7 @@ function mockedAll(mockeble) {
  * ))
  */
 function mockModule(mockebleModule, implementations) {
+    if (implementations === void 0) { implementations = {}; }
     // проверка делается внутри
     mockedAll(mockebleModule);
     if (implementations) {

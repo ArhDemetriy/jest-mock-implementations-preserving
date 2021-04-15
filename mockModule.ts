@@ -74,7 +74,7 @@ function mockModule<Module extends TModule = any>(
     [exported in keyof Module]?:
       | ((this: Module[exported], ...args) => any)
       | { classConstructor?: (this: Module[exported], ...args) => any, [method: string]: (this: Module[exported], ...args) => any }
-  }
+  } = {}
 ): { [exported in keyof Module]: Module[exported] }
 {
   // проверка делается внутри

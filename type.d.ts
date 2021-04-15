@@ -24,9 +24,9 @@ type Implementations<Module> = {
  */
 declare function mockModule<Module extends TModule>(
   mockebleModule: { [exported in keyof Module]: Module[exported] },
-  implementations: {
+  implementations?: {
     [exported in keyof Module]?:
-      | ((this: Module[exported], ...args) => any)// | TFunction<Module[Class]>
+      | ((this: Module[exported], ...args) => any)
       | { classConstructor?: (this: Module[exported], ...args) => any, [method: string]: (this: Module[exported], ...args) => any }
   }
 ): { [exported in keyof Module]: Module[exported] }
